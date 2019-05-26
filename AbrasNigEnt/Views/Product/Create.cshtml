@@ -1,0 +1,43 @@
+﻿@model ManageProductViewModel
+
+<main id="product-create" class="body-part">
+
+    <div class="form-container">
+        <form asp-controller="Product" asp-action="Create" method="post" role="form">
+            <div>
+                <label asp-for="Product.PartNumber" class="form-label"></label>
+                <input asp-for="Product.PartNumber" type="text" class="form-input" />
+            </div>
+            <div>
+                <label asp-for="Product.Description" class="form-label"></label>
+                <input asp-for="Product.Description" type="text" class="form-input" />
+            </div>
+            <div>
+                <label asp-for="Product.Detail" class="form-label"></label>
+                <input asp-for="Product.Detail" type="text" class="form-input" />
+            </div>
+            <div>
+                <label asp-for="Product.Price" class="form-label"></label>
+                <input asp-for="Product.Price" type="text" class="form-input" />
+            </div>
+            <div>
+                @Html.DropDownListFor(m => m.Product.Category,
+               new SelectList(Model.Categories.Select( x => new { Value = x.CategoryId, Text = x.Name}), "Value", "Text"),
+               "Select a category",
+               htmlAttributes: new {@class = "" })
+            </div>
+
+            <div>
+                @Html.DropDownListFor(m => m.Product.Brand,
+               new SelectList(Model.Brands.Select( x => new { Value = x.BrandId, Text = x.Name}), "Value", "Text"),
+               "Select a brand",
+               htmlAttributes: new {@class = "" })
+            </div>
+            <div>
+                <input type="submit" value="Create" />
+            </div>
+        </form>
+
+    </div>
+
+</main>

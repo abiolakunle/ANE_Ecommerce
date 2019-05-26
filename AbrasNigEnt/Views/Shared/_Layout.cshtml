@@ -17,10 +17,7 @@
                     <a href="#" class="nav-item">Home</a>
                     <div class="products">
                         <a href="#" class="nav-item">Products</a>
-                        <div class="product-list">
-                            <a href="#">Product1</a>
-                            <a href="#">Product2</a>
-                        </div>
+                        @await Component.InvokeAsync("CategoryMenu")
                     </div>
                     <a href="#" class="nav-item">About</a>
                     <a href="#" class="nav-item">Contact</a>

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 
-namespace AbrasNigEnt.Models
+namespace AbrasNigEnt.Data.Models
 {
     public class Product
     {
@@ -17,7 +14,13 @@ namespace AbrasNigEnt.Models
 
         public string Detail { get; set; }
 
-        public string Category { get; set; }
+        public string ImageUrl { get; set; }
+
+        public string ThumbUrl { get; set; }
+
+        public virtual Category Category { get; set; }
+
+        public virtual Brand Brand { get; set; }
 
     }
 }

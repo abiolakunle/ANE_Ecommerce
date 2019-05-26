@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Product>
+
+
+
+<main id="product-page" class="body-part">
+
+    <h1>Products</h1>
+
+    <div style="margin-top: 20vh;">
+
+        @foreach (var p in Model)
+        {
+            <h2>Product Name : @p.Description</h2>
+            <h4>Part Number: @p.PartNumber</h4>
+        }
+    </div>
+</main>

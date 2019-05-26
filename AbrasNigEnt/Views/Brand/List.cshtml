@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Brand>
+
+<main id="brand-list" class="body-part">
+    <div>
+        @foreach(var b in Model)
+        {
+            <h2>@b.Name</h2>
+            <p>@b.Description</p>
+        }
+    </div>
+</main>
