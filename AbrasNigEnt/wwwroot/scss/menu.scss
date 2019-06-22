@@ -1,0 +1,85 @@
+﻿//Main menu
+.main-menu {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: $primary-color;
+    color: invert-color($primary-color);
+    text-transform: uppercase;
+    margin: 0 0;
+    padding: 0 0;
+    box-shadow: 0 3px 6px 0 rgba(50,50,50,.3);
+    
+    .menu-branding {
+        color: crimson;
+        font-size: 3em;
+        font-weight: 600;
+        padding: 0 20px;
+        float: left;
+        position: relative;
+    }
+
+    .nav {
+        display: block;
+        list-style: none;
+        float: right;
+        padding: 0 12px;
+        margin: 0;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        top: 10px;
+        font-weight: 600;
+        font-size: .8em;
+
+
+        a {
+            padding: 16px 12px;
+
+            &:hover {
+                color: $secondary-color;
+            }
+        }
+
+        li {
+            display: inline-block;
+            padding: 12px 16px;
+        }
+
+        .dropdown {
+            position: relative;
+            overflow: visible;
+
+            &:hover {
+                .dropdown-content {
+                    display: block;
+                }
+            }
+
+            .dropdown-content {
+                background: $primary-color;
+                display: none;
+                position: absolute;
+                top: 40px;
+                width: 100%;
+                margin: 5px 0;
+                padding: 0;
+                box-shadow: 0 3px 6px 0 rgba(50,50,50,.3);
+                text-align: left;
+                z-index: 2;
+
+
+                li {
+                    position: relative;
+                    display: block;
+
+                    &:hover {
+                        background: $gray;
+                    }
+                    //padding: 12px 16px;
+                }
+            }
+        }
+    }
+}

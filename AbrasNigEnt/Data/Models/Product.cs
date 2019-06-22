@@ -19,8 +19,11 @@ namespace AbrasNigEnt.Data.Models
         public string ThumbUrl { get; set; }
 
         public virtual Category Category { get; set; }
+        public int CategoryId { get; set; }
 
         public virtual Brand Brand { get; set; }
+        public int BrandId { get; set; }
+
 
     }
 }

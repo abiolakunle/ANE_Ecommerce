@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<Category>
 
-<div class="product-list">
-
     @foreach (var c in Model)
     {
-        <a href="#">@c.Name</a>
+        <a class="dropdown-item" href="#">@c.Name</a>
     }
 
-</div>
+
+

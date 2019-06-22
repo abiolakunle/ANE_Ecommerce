@@ -38,7 +38,37 @@ namespace AbrasNigEnt.Controllers
 
             _brandRepository.Create(brand);
 
-            return RedirectToAction("List");
+            return RedirectToAction(nameof(List));
+        }
+
+        [HttpGet]
+        public ViewResult Update(int id)
+        {
+            var brand = _brandRepository.GetById(id);
+
+            return View(brand);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Brand brand)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(brand);
+            }
+
+            _brandRepository.Update(brand);
+
+            return RedirectToAction(nameof(List));
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var brand = _brandRepository.GetById(id);
+
+            _brandRepository.Delete(brand);
+
+            return RedirectToAction(nameof(List));
         }
     }
 }

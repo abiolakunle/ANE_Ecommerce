@@ -1,0 +1,73 @@
+﻿@*Update product*@
+
+@model ManageProductViewModel
+
+<main id="product-update" class="container mt-5">
+
+    <div class="card mx-auto">
+        <h3 class="card-header mb-5">Create new product</h3>
+
+        <form asp-controller="Product" asp-action="Update" method="post" role="form" class="card-body pl-5">
+            @Html.HiddenFor(p => p.Product.ProductId)
+            <div class="form-group">
+                <label asp-for="Product.PartNumber" class="col-md-2 control-label font-weight-bold"></label>
+                <div class="col-md-6">
+                    <input asp-for="Product.PartNumber" class="form-control" readonly/>
+                    <span asp-validation-for="Product.PartNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Description" class="col-md-2 control-label font-weight-bold"></label>
+                <div class="col-md-6">
+                    <textarea asp-for="Product.Description" rows="5" class="form-control"></textarea>
+                    <span asp-validation-for="Product.Description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Detail" class="col-md-2 control-label font-weight-bold"></label>
+                <div class="col-md-6">
+                    <input asp-for="Product.Detail" class="form-control" />
+                    <span asp-validation-for="Product.Detail" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Price" class="col-md-2 control-label font-weight-bold"></label>
+                <div class="col-md-6">
+                    <input asp-for="Product.Price" type="number" class="form-control" />
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Category" class="col-md-2 control-label font-weight-bold"></label>
+                <div class="col-md-6">
+                    @Html.DropDownListFor(m => m.Product.Category,
+                   new SelectList(Model.Categories.Select( x => new { Value = x.CategoryId, Text = x.Name}), "Value", "Text"),
+                   "Select a category",
+                   htmlAttributes: new {@class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Product.Brand" class="col-md-2 control-label font-weight-bold"></label>
+                <div class="col-md-6">
+                    @Html.DropDownListFor(m => m.Product.Brand,
+                   new SelectList(Model.Brands.Select( x => new { Value = x.BrandId, Text = x.Name}), "Value", "Text"),
+                   "Select a brand",
+                   htmlAttributes: new {@class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="btn-group col-md-offset-2 col-md-6">
+                    <input class="btn btn-dark" type="submit" value="Return" asp-controller="Product" asp-action="List" />
+                    <input class="btn btn-primary" type="submit" value="Update" />
+                </div>
+            </div>
+        </form>
+</div>
+
+
+</main>

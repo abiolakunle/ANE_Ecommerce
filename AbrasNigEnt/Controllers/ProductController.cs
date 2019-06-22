@@ -30,12 +30,7 @@ namespace AbrasNigEnt.Controllers
 
         public ViewResult Create()
         {
-            var viewModel = new ManageProductViewModel
-            {
-                Product = new Product(),
-                Brands = _brandRepository.GetAll(),
-                Categories = _categoryRepository.GetAll()
-            };
+            var viewModel = CreateViewModel();
 
             return View(viewModel);
         }
@@ -51,7 +46,47 @@ namespace AbrasNigEnt.Controllers
 
             _productRepository.Create(manageProductViewModel.Product);
 
-            return RedirectToAction("List");
+            return RedirectToAction(nameof(List));
+        }
+
+        [HttpGet]
+        public ViewResult Update(int id)
+        {
+            var theProduct = _productRepository.GetById(id);
+
+            var viewModel = CreateViewModel();
+            viewModel.Product = theProduct;
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Update(ManageProductViewModel manageProductViewModel)
+        {
+            _productRepository.Update(manageProductViewModel.Product);
+
+            return RedirectToAction(nameof(List));
+        }
+
+
+        public IActionResult Delete(int id)
+        {
+            var theProduct = _productRepository.GetById(id);
+
+            _productRepository.Delete(theProduct);
+
+            return RedirectToAction(nameof(List));
+
+        }
+
+        private ManageProductViewModel CreateViewModel()
+        {
+            return new ManageProductViewModel
+            {
+                Product = new Product(),
+                Brands = _brandRepository.GetAll(),
+                Categories = _categoryRepository.GetAll()
+            };
         }
 
 

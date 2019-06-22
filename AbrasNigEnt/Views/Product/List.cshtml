@@ -1,17 +1,37 @@
-﻿@model IEnumerable<Product>
+﻿@*List products*@
+
+@model IEnumerable<Product>
+
+
+<main id="product-page" class="container mt-5">
+   
+        <div class="">
+            <h1 class="mb-5">Products</h1>
+            <a asp-controller="Product" asp-action="Create" class="btn btn-dark ml-auto">Create new</a>
+        </div>
+        
+
+        <div class="row">
+            @foreach (var p in Model)
+            {  <div class="col-md-4 mb-3">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h4>Product: @p.Category.Name</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5><strong>Part Number:</strong> @p.PartNumber</h5>
+                        <p class="card-text"><strong>Brand:</strong> @p.Brand.Name</p>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-controller="Product" asp-action="Update" asp-route-id="@p.ProductId" class="btn btn-dark col-md-3">Edit</a>
+                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@p.ProductId" class="btn btn-primary col-md-3">Delete</a>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    
 
 
 
-<main id="product-page" class="body-part">
-
-    <h1>Products</h1>
-
-    <div style="margin-top: 20vh;">
-
-        @foreach (var p in Model)
-        {
-            <h2>Product Name : @p.Description</h2>
-            <h4>Part Number: @p.PartNumber</h4>
-        }
-    </div>
 </main>

@@ -1,0 +1,6 @@
+﻿@model IEnumerable<Brand>
+
+    @foreach(var b in Model)
+    {
+        <a class="dropdown-item" href="#">@b.Name</a>
+    }

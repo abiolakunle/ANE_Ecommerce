@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "wwwroot/scss/main.css",
+    "inputFile": "wwwroot/scss/main.scss"
+  },
+  {
+    "outputFile": "wwwroot/scss/_variables.css",
+    "inputFile": "wwwroot/scss/_variables.scss"
+  },
+  {
+    "outputFile": "wwwroot/scss/variables.css",
+    "inputFile": "wwwroot/scss/variables.scss"
+  }
+]

@@ -40,5 +40,21 @@ namespace AbrasNigEnt.Controllers
             return RedirectToAction("List");
         }
 
+        [HttpGet]
+        public ViewResult Update(int id)
+        {
+            var theCategory = _categoryRepository.GetById(id);
+
+            return View(theCategory);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Category category)
+        {
+            _categoryRepository.Update(category);
+
+            return RedirectToAction(nameof(List));
+        }
+
     }
 }

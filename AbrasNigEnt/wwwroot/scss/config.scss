@@ -1,0 +1,19 @@
+﻿$primary-color: #fff;
+$secondary-color: crimson;
+$text-color: #808080;
+$link-color: #444;
+$gray: lighten(#444, 70);
+
+@mixin easeout {
+    transition: all ease-in-out 0.3s;
+}
+
+
+@function invert-color($color) {
+    @if(lightness($color) > 40) {
+        @return #000;
+    }
+    @else {
+        @return #fff;
+    }
+}

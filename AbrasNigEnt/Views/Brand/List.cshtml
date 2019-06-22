@@ -1,11 +1,30 @@
-﻿@model IEnumerable<Brand>
+﻿@*List brands*@
 
-<main id="brand-list" class="body-part">
-    <div>
-        @foreach(var b in Model)
+@model IEnumerable<Brand>
+
+<main id="brand-list" class="container mt-5">
+    <div class="">
+        <h1 class="mb-5">Brands</h1>
+        <a asp-controller="Brand" asp-action="Create" class="btn btn-dark ml-auto">Create new</a>
+    </div>
+
+    <div class="row">
+        @foreach (var b in Model)
         {
-            <h2>@b.Name</h2>
-            <p>@b.Description</p>
+            <div class="col-md-6 mb-3">
+                <div class="card shadow-sm">
+                    <div class="card-header mb-5">
+                        <h4>@b.Name</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>@b.Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-controller="Brand" asp-action="Update" asp-route-id="@b.BrandId" class="btn btn-dark">Edit</a>
+                        <a asp-controller="Brand" asp-action="Delete" asp-route-id="@b.BrandId" class="btn btn-primary">Delete</a>
+                    </div>
+                </div>
+            </div>
         }
     </div>
 </main>
