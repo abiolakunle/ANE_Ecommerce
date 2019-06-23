@@ -5,12 +5,37 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190524185054_Initial.cs" />
+    <Compile Remove="Migrations\20190524185054_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190524210140_Initial2.cs" />
+    <Compile Remove="Migrations\20190524210140_Initial2.Designer.cs" />
+    <Compile Remove="Migrations\20190622151205_Initialize.cs" />
+    <Compile Remove="Migrations\20190622151205_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190622151419_Initialize.cs" />
+    <Compile Remove="Migrations\20190622151419_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190622151529_Initialize.cs" />
+    <Compile Remove="Migrations\20190622151529_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190622215233_Initialize.cs" />
+    <Compile Remove="Migrations\20190622215233_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190622220158_Initialize.cs" />
+    <Compile Remove="Migrations\20190622220158_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190622220248_Initialize.cs" />
+    <Compile Remove="Migrations\20190622220248_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190622220634_Initialize.cs" />
+    <Compile Remove="Migrations\20190622220634_Initialize.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0"></DotNetCliToolReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FlexLabs.EntityFrameworkCore.Upsert" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup>

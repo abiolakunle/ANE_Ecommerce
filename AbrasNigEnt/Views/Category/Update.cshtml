@@ -10,10 +10,10 @@
         <form asp-controller="Category" asp-action="Update" method="post" role="form" class="card-body pl-5">
             @Html.HiddenFor(m => m.CategoryId)
             <div class="form-group">
-                <label asp-for="Name" class="col-md-2 control-label font-weight-bold"></label>
+                <label asp-for="CategoryName" class="col-md-2 control-label font-weight-bold"></label>
                 <div class="col-md-6">
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <input asp-for="CategoryName" class="form-control" />
+                    <span asp-validation-for="CategoryName" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">

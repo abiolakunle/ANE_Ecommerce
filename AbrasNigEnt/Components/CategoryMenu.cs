@@ -19,7 +19,7 @@ namespace AbrasNigEnt.Components
 
         public IViewComponentResult Invoke()
         {
-            var categories = _category.GetAll().OrderBy(c => c.Name);
+            var categories = _category.GetAll().OrderBy(c => c.CategoryName);
             return View(categories);
         }
 

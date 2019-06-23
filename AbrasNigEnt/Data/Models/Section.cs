@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace AbrasNigEnt.Data.Models
 {
-    public class Machine
+    public class Section
     {
-        public int MachineId { get; set; }
+        public int SectionId { get; set; }
 
-        public string ModelName { get; set; }
+        public string SectionName { get; set; }
 
         public string Description { get; set; }
 
@@ -17,15 +17,9 @@ namespace AbrasNigEnt.Data.Models
 
         public string ThumbUrl { get; set; }
 
-        public string SerialNumber { get; set; }
-
-        public Brand Brand { get; set; }
-        public int BrandId { get; set; }
-
-        public MachineType MachineType { get; set; }
-
-        public ICollection<Section> Sections { get; set; }
+        public ICollection<Machine> Machines { get; set; }
 
         public ICollection<SectionGroup> SectionGroups { get; set; }
+        
     }
 }

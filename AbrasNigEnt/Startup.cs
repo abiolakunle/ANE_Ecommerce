@@ -11,15 +11,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using AbrasNigEnt.Data.Interfaces;
 using AbrasNigEnt.Data.Repositories;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace AbrasNigEnt
 {
     public class Startup
     {
         private IConfiguration Configuration { get; }
-        public Startup(IConfiguration config)
+        private  IHostingEnvironment HostingEnvironment { get; }
+        public Startup(IConfiguration config, IHostingEnvironment hostingEnv)
         {
             Configuration = config;
+            HostingEnvironment = hostingEnv;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -27,6 +31,8 @@ namespace AbrasNigEnt
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), HostingEnvironment.WebRootPath)));
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
                 Configuration["ConnectionStrings:DefaultConnection"]
                 ));
