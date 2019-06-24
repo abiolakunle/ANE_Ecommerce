@@ -58,7 +58,7 @@ namespace AbrasNigEnt
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
 
-            DbInitializer.SeedDatabase(app.ApplicationServices);
+            //DbInitializer.SeedDatabase(app.ApplicationServices);
 
         }
     }

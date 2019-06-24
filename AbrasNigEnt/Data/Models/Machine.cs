@@ -7,6 +7,12 @@ namespace AbrasNigEnt.Data.Models
 {
     public class Machine
     {
+        public Machine()
+        {
+            Sections = new List<Section>();
+            SectionGroups = new List<SectionGroup>();
+        }
+
         public int MachineId { get; set; }
 
         public string ModelName { get; set; }

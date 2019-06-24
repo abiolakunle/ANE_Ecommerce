@@ -8,6 +8,11 @@ namespace AbrasNigEnt.Data.Models
 {
     public class Brand
     {
+        public Brand()
+        {
+            Products = new List<Product>();
+        }
+
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int BrandId { get; set; }
 

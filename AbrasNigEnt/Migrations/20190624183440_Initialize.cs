@@ -64,6 +64,7 @@ namespace AbrasNigEnt.Migrations
                     SerialNumber = table.Column<string>(nullable: true),
                     BrandId = table.Column<int>(nullable: false),
                     MachineTypeId = table.Column<int>(nullable: true),
+                    SectionGroupId = table.Column<int>(nullable: true),
                     SectionId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -107,7 +108,7 @@ namespace AbrasNigEnt.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SectionTypes",
+                name: "SectionGroups",
                 columns: table => new
                 {
                     SectionGroupId = table.Column<int>(nullable: false)
@@ -117,19 +118,19 @@ namespace AbrasNigEnt.Migrations
                     ImageUrl = table.Column<string>(nullable: true),
                     ThumbUrl = table.Column<string>(nullable: true),
                     SectionId = table.Column<int>(nullable: false),
-                    MachineId = table.Column<int>(nullable: false)
+                    MachineId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SectionTypes", x => x.SectionGroupId);
+                    table.PrimaryKey("PK_SectionGroups", x => x.SectionGroupId);
                     table.ForeignKey(
-                        name: "FK_SectionTypes_Machines_MachineId",
+                        name: "FK_SectionGroups_Machines_MachineId",
                         column: x => x.MachineId,
                         principalTable: "Machines",
                         principalColumn: "MachineId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SectionTypes_Sections_SectionId",
+                        name: "FK_SectionGroups_Sections_SectionId",
                         column: x => x.SectionId,
                         principalTable: "Sections",
                         principalColumn: "SectionId",
@@ -150,7 +151,9 @@ namespace AbrasNigEnt.Migrations
                     ThumbUrl = table.Column<string>(nullable: true),
                     CategoryId = table.Column<int>(nullable: false),
                     BrandId = table.Column<int>(nullable: false),
-                    SectionGroupId = table.Column<int>(nullable: true)
+                    Remarks = table.Column<string>(nullable: true),
+                    SectionGroupId = table.Column<int>(nullable: true),
+                    SectionId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -168,10 +171,16 @@ namespace AbrasNigEnt.Migrations
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_SectionTypes_SectionGroupId",
+                        name: "FK_Products_SectionGroups_SectionGroupId",
                         column: x => x.SectionGroupId,
-                        principalTable: "SectionTypes",
+                        principalTable: "SectionGroups",
                         principalColumn: "SectionGroupId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Products_Sections_SectionId",
+                        column: x => x.SectionId,
+                        principalTable: "Sections",
+                        principalColumn: "SectionId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -184,6 +193,11 @@ namespace AbrasNigEnt.Migrations
                 name: "IX_Machines_MachineTypeId",
                 table: "Machines",
                 column: "MachineTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Machines_SectionGroupId",
+                table: "Machines",
+                column: "SectionGroupId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Machines_SectionId",
@@ -206,19 +220,32 @@ namespace AbrasNigEnt.Migrations
                 column: "SectionGroupId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_SectionId",
+                table: "Products",
+                column: "SectionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SectionGroups_MachineId",
+                table: "SectionGroups",
+                column: "MachineId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SectionGroups_SectionId",
+                table: "SectionGroups",
+                column: "SectionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Sections_MachineId",
                 table: "Sections",
                 column: "MachineId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_SectionTypes_MachineId",
-                table: "SectionTypes",
-                column: "MachineId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SectionTypes_SectionId",
-                table: "SectionTypes",
-                column: "SectionId");
+            migrationBuilder.AddForeignKey(
+                name: "FK_Machines_SectionGroups_SectionGroupId",
+                table: "Machines",
+                column: "SectionGroupId",
+                principalTable: "SectionGroups",
+                principalColumn: "SectionGroupId",
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Machines_Sections_SectionId",
@@ -240,6 +267,10 @@ namespace AbrasNigEnt.Migrations
                 table: "Machines");
 
             migrationBuilder.DropForeignKey(
+                name: "FK_Machines_SectionGroups_SectionGroupId",
+                table: "Machines");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_Machines_Sections_SectionId",
                 table: "Machines");
 
@@ -250,13 +281,13 @@ namespace AbrasNigEnt.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "SectionTypes");
-
-            migrationBuilder.DropTable(
                 name: "Brands");
 
             migrationBuilder.DropTable(
                 name: "MachineTypes");
+
+            migrationBuilder.DropTable(
+                name: "SectionGroups");
 
             migrationBuilder.DropTable(
                 name: "Sections");

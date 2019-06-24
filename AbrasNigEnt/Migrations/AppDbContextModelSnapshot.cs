@@ -69,6 +69,8 @@ namespace AbrasNigEnt.Migrations
 
                     b.Property<string>("ModelName");
 
+                    b.Property<int?>("SectionGroupId");
+
                     b.Property<int?>("SectionId");
 
                     b.Property<string>("SerialNumber");
@@ -80,6 +82,8 @@ namespace AbrasNigEnt.Migrations
                     b.HasIndex("BrandId");
 
                     b.HasIndex("MachineTypeId");
+
+                    b.HasIndex("SectionGroupId");
 
                     b.HasIndex("SectionId");
 
@@ -121,7 +125,11 @@ namespace AbrasNigEnt.Migrations
 
                     b.Property<decimal>("Price");
 
+                    b.Property<string>("Remarks");
+
                     b.Property<int?>("SectionGroupId");
+
+                    b.Property<int?>("SectionId");
 
                     b.Property<string>("ThumbUrl");
 
@@ -132,6 +140,8 @@ namespace AbrasNigEnt.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("SectionGroupId");
+
+                    b.HasIndex("SectionId");
 
                     b.ToTable("Products");
                 });
@@ -169,7 +179,7 @@ namespace AbrasNigEnt.Migrations
 
                     b.Property<string>("ImageUrl");
 
-                    b.Property<int>("MachineId");
+                    b.Property<int?>("MachineId");
 
                     b.Property<string>("SectionGroupName");
 
@@ -183,7 +193,7 @@ namespace AbrasNigEnt.Migrations
 
                     b.HasIndex("SectionId");
 
-                    b.ToTable("SectionTypes");
+                    b.ToTable("SectionGroups");
                 });
 
             modelBuilder.Entity("AbrasNigEnt.Data.Models.Machine", b =>
@@ -196,6 +206,10 @@ namespace AbrasNigEnt.Migrations
                     b.HasOne("AbrasNigEnt.Data.Models.MachineType", "MachineType")
                         .WithMany("Machines")
                         .HasForeignKey("MachineTypeId");
+
+                    b.HasOne("AbrasNigEnt.Data.Models.SectionGroup")
+                        .WithMany("Machines")
+                        .HasForeignKey("SectionGroupId");
 
                     b.HasOne("AbrasNigEnt.Data.Models.Section")
                         .WithMany("Machines")
@@ -214,9 +228,13 @@ namespace AbrasNigEnt.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("AbrasNigEnt.Data.Models.SectionGroup")
+                    b.HasOne("AbrasNigEnt.Data.Models.SectionGroup", "SectionGroup")
                         .WithMany("Products")
                         .HasForeignKey("SectionGroupId");
+
+                    b.HasOne("AbrasNigEnt.Data.Models.Section", "Section")
+                        .WithMany("Products")
+                        .HasForeignKey("SectionId");
                 });
 
             modelBuilder.Entity("AbrasNigEnt.Data.Models.Section", b =>
@@ -228,10 +246,9 @@ namespace AbrasNigEnt.Migrations
 
             modelBuilder.Entity("AbrasNigEnt.Data.Models.SectionGroup", b =>
                 {
-                    b.HasOne("AbrasNigEnt.Data.Models.Machine", "Machine")
+                    b.HasOne("AbrasNigEnt.Data.Models.Machine")
                         .WithMany("SectionGroups")
-                        .HasForeignKey("MachineId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("MachineId");
 
                     b.HasOne("AbrasNigEnt.Data.Models.Section", "Section")
                         .WithMany("SectionGroups")

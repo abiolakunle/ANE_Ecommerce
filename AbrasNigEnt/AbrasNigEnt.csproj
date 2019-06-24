@@ -23,6 +23,12 @@
     <Compile Remove="Migrations\20190622220248_Initialize.Designer.cs" />
     <Compile Remove="Migrations\20190622220634_Initialize.cs" />
     <Compile Remove="Migrations\20190622220634_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190623163709_Initialize.cs" />
+    <Compile Remove="Migrations\20190623163709_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190624114607_initialize.cs" />
+    <Compile Remove="Migrations\20190624114607_initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190624182749_Initialize.cs" />
+    <Compile Remove="Migrations\20190624182749_Initialize.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +46,12 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\carousel_images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\MasterTable\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

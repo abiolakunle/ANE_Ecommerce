@@ -7,6 +7,13 @@ namespace AbrasNigEnt.Data.Models
 {
     public class Section
     {
+        public Section()
+        {
+            Machines = new List<Machine>();
+            SectionGroups = new List<SectionGroup>();
+            Products = new List<Product>();
+        }
+
         public int SectionId { get; set; }
 
         public string SectionName { get; set; }
@@ -20,6 +27,8 @@ namespace AbrasNigEnt.Data.Models
         public ICollection<Machine> Machines { get; set; }
 
         public ICollection<SectionGroup> SectionGroups { get; set; }
+
+        public ICollection<Product> Products { get; set; }
         
     }
 }

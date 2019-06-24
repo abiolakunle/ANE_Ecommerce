@@ -24,9 +24,10 @@ namespace AbrasNigEnt.Data.Models
         public virtual Brand Brand { get; set; }
         public int BrandId { get; set; }
 
-        //public SectionGroup SectionGroup { get; set; }
-        //public int SectionGroupId { get; set; }
+        public string Remarks { get; set; }
 
+        public SectionGroup SectionGroup { get; set; }
 
+        public Section Section { get; set; }       
     }
 }

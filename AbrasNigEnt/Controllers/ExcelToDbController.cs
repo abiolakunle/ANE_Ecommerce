@@ -21,12 +21,68 @@ namespace AbrasNigEnt.Controllers
         {
             _environment = environment;
             _dbContext = dbContext;
-
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Upload([FromForm] IFormFile excelFile)
+        {
+            if (excelFile == null || excelFile.Length == 0)
+            {
+                return Content("File not selected");
+            }
+
+            //check if file extension is excel
+            string fileExtension = Path.GetExtension(excelFile.FileName);
+
+            //Validate uploaded file and return error
+            if (fileExtension != ".xls" && fileExtension != ".xlsx")
+            {
+                ViewBag.Message = "Please select the excel file with .xls or .xlsx extension";
+                return View();
+            }
+
+            //Generate full filpath and save file
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), _environment.WebRootPath, excelFile.FileName);
+
+            using (var bits = new FileStream(filePath, FileMode.Create))
+            {
+                await excelFile.CopyToAsync(bits);
+            }
+
+            FileInfo file = new FileInfo(filePath);
+
+            //dotnet add package EPPlus.Core--version 1.5.4
+            using (ExcelPackage package = new ExcelPackage(file))
+            {
+                ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+                int totalRows = workSheet.Dimension.Rows;
+
+                List<Machine> machineList = new List<Machine>();
+
+                for (int i = 2; i <= totalRows; i++)
+                {
+                    machineList.Add(new Machine
+                    {
+                        //BrandId = Convert.ToInt32(workSheet.Cells[i, 1].Value.ToString()),
+                        ModelName = workSheet.Cells[i, 2].Value.ToString(),
+                    });
+                }
+
+                foreach (var machine in machineList)
+                {
+                    //dotnet add package FlexLabs.EntityFrameworkCore.Upsert--version 2.1.2
+                    _dbContext.Upsert(machine).On(b => new { b.ModelName }).Run();
+                }
+
+                return View(nameof(Index));
+
+            }
         }
 
 

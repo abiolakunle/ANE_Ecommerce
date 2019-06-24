@@ -22,7 +22,7 @@ namespace AbrasNigEnt.Data
 
         public DbSet<Section> Sections { get; set; }
 
-        public DbSet<SectionGroup> SectionTypes { get; set; }
+        public DbSet<SectionGroup> SectionGroups { get; set; }
 
 
 
@@ -31,9 +31,13 @@ namespace AbrasNigEnt.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Machine>().HasMany(m => m.Sections);
+            modelBuilder.Entity<Machine>().HasMany(m => m.SectionGroups);
+
             modelBuilder.Entity<Section>().HasMany(s => s.Machines);
 
-            
+            modelBuilder.Entity<SectionGroup>().HasMany(s => s.Machines);
+
+            modelBuilder.Entity<Product>().HasOne(s => s.SectionGroup);
         }
     }
 }
