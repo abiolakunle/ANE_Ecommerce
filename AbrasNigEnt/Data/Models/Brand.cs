@@ -11,6 +11,10 @@ namespace AbrasNigEnt.Data.Models
         public Brand()
         {
             Products = new List<Product>();
+            Categories = new List<Category>();
+            Machines = new List<Machine>();
+            Sections = new List<Section>();
+            SectionGroups = new List<SectionGroup>();
         }
 
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -21,5 +25,13 @@ namespace AbrasNigEnt.Data.Models
         public string Description { get; set; }
         
         public ICollection<Product> Products { get; set; }
+
+        public ICollection<Category> Categories { get; set; }
+
+        public ICollection<Machine> Machines { get; set; }
+
+        public ICollection<Section> Sections { get; set; }
+
+        public ICollection<SectionGroup> SectionGroups { get; set; }
     }
 }

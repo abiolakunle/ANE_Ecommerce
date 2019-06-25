@@ -40,6 +40,8 @@ namespace AbrasNigEnt.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BrandId");
+
                     b.Property<string>("CategoryName");
 
                     b.Property<string>("Description");
@@ -49,6 +51,8 @@ namespace AbrasNigEnt.Migrations
                     b.Property<string>("ThumbUrl");
 
                     b.HasKey("CategoryId");
+
+                    b.HasIndex("BrandId");
 
                     b.ToTable("Categories");
                 });
@@ -125,6 +129,8 @@ namespace AbrasNigEnt.Migrations
 
                     b.Property<decimal>("Price");
 
+                    b.Property<int>("Quantity");
+
                     b.Property<string>("Remarks");
 
                     b.Property<int?>("SectionGroupId");
@@ -152,6 +158,8 @@ namespace AbrasNigEnt.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BrandId");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("ImageUrl");
@@ -164,6 +172,8 @@ namespace AbrasNigEnt.Migrations
 
                     b.HasKey("SectionId");
 
+                    b.HasIndex("BrandId");
+
                     b.HasIndex("MachineId");
 
                     b.ToTable("Sections");
@@ -174,6 +184,8 @@ namespace AbrasNigEnt.Migrations
                     b.Property<int>("SectionGroupId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BrandId");
 
                     b.Property<string>("Description");
 
@@ -189,6 +201,8 @@ namespace AbrasNigEnt.Migrations
 
                     b.HasKey("SectionGroupId");
 
+                    b.HasIndex("BrandId");
+
                     b.HasIndex("MachineId");
 
                     b.HasIndex("SectionId");
@@ -196,10 +210,17 @@ namespace AbrasNigEnt.Migrations
                     b.ToTable("SectionGroups");
                 });
 
+            modelBuilder.Entity("AbrasNigEnt.Data.Models.Category", b =>
+                {
+                    b.HasOne("AbrasNigEnt.Data.Models.Brand")
+                        .WithMany("Categories")
+                        .HasForeignKey("BrandId");
+                });
+
             modelBuilder.Entity("AbrasNigEnt.Data.Models.Machine", b =>
                 {
                     b.HasOne("AbrasNigEnt.Data.Models.Brand", "Brand")
-                        .WithMany()
+                        .WithMany("Machines")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -239,6 +260,10 @@ namespace AbrasNigEnt.Migrations
 
             modelBuilder.Entity("AbrasNigEnt.Data.Models.Section", b =>
                 {
+                    b.HasOne("AbrasNigEnt.Data.Models.Brand")
+                        .WithMany("Sections")
+                        .HasForeignKey("BrandId");
+
                     b.HasOne("AbrasNigEnt.Data.Models.Machine")
                         .WithMany("Sections")
                         .HasForeignKey("MachineId");
@@ -246,6 +271,10 @@ namespace AbrasNigEnt.Migrations
 
             modelBuilder.Entity("AbrasNigEnt.Data.Models.SectionGroup", b =>
                 {
+                    b.HasOne("AbrasNigEnt.Data.Models.Brand")
+                        .WithMany("SectionGroups")
+                        .HasForeignKey("BrandId");
+
                     b.HasOne("AbrasNigEnt.Data.Models.Machine")
                         .WithMany("SectionGroups")
                         .HasForeignKey("MachineId");
