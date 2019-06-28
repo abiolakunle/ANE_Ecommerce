@@ -1,0 +1,10 @@
+﻿@model MachineViewModel
+
+<div>  @Model.Machine.ModelName</div>
+<div>
+    @foreach(var s in Model.Sections)
+    {
+        <div>@s.SectionName</div>
+    }
+</div>
+    

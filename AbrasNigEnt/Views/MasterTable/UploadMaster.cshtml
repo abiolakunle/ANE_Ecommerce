@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MasterTableLine>
+
+<main id="excel-db" class="container mt-5">
+
+    <div class="card mx-auto">
+        <h3 class="card-header mb-5">Upload Master Table</h3>
+
+        <form asp-controller="MasterTable" asp-action="UploadMaster" method="post" role="form" class="card-body pl-5" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="col-md-2 control-label font-weight-bold">Master Table File</label>
+                <div class="col-md-6">
+                    <input name="masterFile" type="file" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="btn-group col-md-offset-2 col-md-6">
+                    <input class="btn btn-primary" type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <td>Model Number</td>
+                    <td>Serial number</td>
+                    <td>Section</td>
+                    <td>Section Group</td>
+                    <td>Part name</td>
+                    <td>Part number</td>
+                    <td>Quantity</td>
+                    <td>Remarks</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var line in Model)
+                    {
+                        <tr>
+                            <td>@line.ModelName</td>
+                            <td>@line.SerialNumber</td>
+                            <td>@line.Section</td>
+                            <td>@line.SectionGroup</td>
+                            <td>@line.PartName</td>
+                            <td>@line.PartNumber</td>
+                            <td>@line.Quantity</td>
+                            <td>@line.Remarks</td>
+                        </tr>
+
+                    }
+
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+</main>

@@ -40,13 +40,73 @@ namespace AbrasNigEnt.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BrandId");
+
+                    b.Property<string>("CategoryName");
+
                     b.Property<string>("Description");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<string>("ThumbUrl");
 
                     b.HasKey("CategoryId");
 
+                    b.HasIndex("BrandId");
+
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("AbrasNigEnt.Data.Models.Machine", b =>
+                {
+                    b.Property<int>("MachineId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BrandId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<int?>("MachineTypeId");
+
+                    b.Property<string>("ModelName");
+
+                    b.Property<int?>("SectionGroupId");
+
+                    b.Property<int?>("SectionId");
+
+                    b.Property<string>("SerialNumber");
+
+                    b.Property<string>("ThumbUrl");
+
+                    b.HasKey("MachineId");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("MachineTypeId");
+
+                    b.HasIndex("SectionGroupId");
+
+                    b.HasIndex("SectionId");
+
+                    b.ToTable("Machines");
+                });
+
+            modelBuilder.Entity("AbrasNigEnt.Data.Models.MachineType", b =>
+                {
+                    b.Property<int>("MachineTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("MachineTypeName");
+
+                    b.HasKey("MachineTypeId");
+
+                    b.ToTable("MachineTypes");
                 });
 
             modelBuilder.Entity("AbrasNigEnt.Data.Models.Product", b =>
@@ -55,9 +115,9 @@ namespace AbrasNigEnt.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BrandId");
+                    b.Property<int>("BrandId");
 
-                    b.Property<int?>("CategoryId");
+                    b.Property<int>("CategoryId");
 
                     b.Property<string>("Description");
 
@@ -69,6 +129,14 @@ namespace AbrasNigEnt.Migrations
 
                     b.Property<decimal>("Price");
 
+                    b.Property<string>("Quantity");
+
+                    b.Property<string>("Remarks");
+
+                    b.Property<int?>("SectionGroupId");
+
+                    b.Property<int?>("SectionId");
+
                     b.Property<string>("ThumbUrl");
 
                     b.HasKey("ProductId");
@@ -77,18 +145,144 @@ namespace AbrasNigEnt.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("SectionGroupId");
+
+                    b.HasIndex("SectionId");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("AbrasNigEnt.Data.Models.Section", b =>
+                {
+                    b.Property<int>("SectionId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BrandId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<int?>("MachineId");
+
+                    b.Property<string>("SectionName");
+
+                    b.Property<string>("ThumbUrl");
+
+                    b.HasKey("SectionId");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("MachineId");
+
+                    b.ToTable("Sections");
+                });
+
+            modelBuilder.Entity("AbrasNigEnt.Data.Models.SectionGroup", b =>
+                {
+                    b.Property<int>("SectionGroupId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BrandId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<int?>("MachineId");
+
+                    b.Property<string>("SectionGroupName");
+
+                    b.Property<int>("SectionId");
+
+                    b.Property<string>("ThumbUrl");
+
+                    b.HasKey("SectionGroupId");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("MachineId");
+
+                    b.HasIndex("SectionId");
+
+                    b.ToTable("SectionGroups");
+                });
+
+            modelBuilder.Entity("AbrasNigEnt.Data.Models.Category", b =>
+                {
+                    b.HasOne("AbrasNigEnt.Data.Models.Brand")
+                        .WithMany("Categories")
+                        .HasForeignKey("BrandId");
+                });
+
+            modelBuilder.Entity("AbrasNigEnt.Data.Models.Machine", b =>
+                {
+                    b.HasOne("AbrasNigEnt.Data.Models.Brand", "Brand")
+                        .WithMany("Machines")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AbrasNigEnt.Data.Models.MachineType", "MachineType")
+                        .WithMany("Machines")
+                        .HasForeignKey("MachineTypeId");
+
+                    b.HasOne("AbrasNigEnt.Data.Models.SectionGroup")
+                        .WithMany("Machines")
+                        .HasForeignKey("SectionGroupId");
+
+                    b.HasOne("AbrasNigEnt.Data.Models.Section")
+                        .WithMany("Machines")
+                        .HasForeignKey("SectionId");
                 });
 
             modelBuilder.Entity("AbrasNigEnt.Data.Models.Product", b =>
                 {
                     b.HasOne("AbrasNigEnt.Data.Models.Brand", "Brand")
-                        .WithMany()
-                        .HasForeignKey("BrandId");
+                        .WithMany("Products")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AbrasNigEnt.Data.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AbrasNigEnt.Data.Models.SectionGroup", "SectionGroup")
+                        .WithMany("Products")
+                        .HasForeignKey("SectionGroupId");
+
+                    b.HasOne("AbrasNigEnt.Data.Models.Section", "Section")
+                        .WithMany("Products")
+                        .HasForeignKey("SectionId");
+                });
+
+            modelBuilder.Entity("AbrasNigEnt.Data.Models.Section", b =>
+                {
+                    b.HasOne("AbrasNigEnt.Data.Models.Brand")
+                        .WithMany("Sections")
+                        .HasForeignKey("BrandId");
+
+                    b.HasOne("AbrasNigEnt.Data.Models.Machine")
+                        .WithMany("Sections")
+                        .HasForeignKey("MachineId");
+                });
+
+            modelBuilder.Entity("AbrasNigEnt.Data.Models.SectionGroup", b =>
+                {
+                    b.HasOne("AbrasNigEnt.Data.Models.Brand")
+                        .WithMany("SectionGroups")
+                        .HasForeignKey("BrandId");
+
+                    b.HasOne("AbrasNigEnt.Data.Models.Machine")
+                        .WithMany("SectionGroups")
+                        .HasForeignKey("MachineId");
+
+                    b.HasOne("AbrasNigEnt.Data.Models.Section", "Section")
+                        .WithMany("SectionGroups")
+                        .HasForeignKey("SectionId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

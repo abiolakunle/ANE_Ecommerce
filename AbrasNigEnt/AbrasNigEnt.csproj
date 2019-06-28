@@ -5,6 +5,49 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\ViewModels\**" />
+    <Content Remove="Data\ViewModels\**" />
+    <EmbeddedResource Remove="Data\ViewModels\**" />
+    <None Remove="Data\ViewModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20190524185054_Initial.cs" />
+    <Compile Remove="Migrations\20190524185054_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190524210140_Initial2.cs" />
+    <Compile Remove="Migrations\20190524210140_Initial2.Designer.cs" />
+    <Compile Remove="Migrations\20190622151205_Initialize.cs" />
+    <Compile Remove="Migrations\20190622151205_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190622151419_Initialize.cs" />
+    <Compile Remove="Migrations\20190622151419_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190622151529_Initialize.cs" />
+    <Compile Remove="Migrations\20190622151529_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190622215233_Initialize.cs" />
+    <Compile Remove="Migrations\20190622215233_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190622220158_Initialize.cs" />
+    <Compile Remove="Migrations\20190622220158_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190622220248_Initialize.cs" />
+    <Compile Remove="Migrations\20190622220248_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190622220634_Initialize.cs" />
+    <Compile Remove="Migrations\20190622220634_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190623163709_Initialize.cs" />
+    <Compile Remove="Migrations\20190623163709_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190624114607_initialize.cs" />
+    <Compile Remove="Migrations\20190624114607_initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190624182749_Initialize.cs" />
+    <Compile Remove="Migrations\20190624182749_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190624183440_Initialize.cs" />
+    <Compile Remove="Migrations\20190624183440_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190624190756_Initialize.cs" />
+    <Compile Remove="Migrations\20190624190756_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190624192937_Initialize.cs" />
+    <Compile Remove="Migrations\20190624192937_Initialize.Designer.cs" />
+    <Compile Remove="Migrations\20190625194936_initialize.cs" />
+    <Compile Remove="Migrations\20190625194936_initialize.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
@@ -12,9 +55,18 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0"></DotNetCliToolReference>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FlexLabs.EntityFrameworkCore.Upsert" Version="2.1.2" />
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\images\carousel_images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\MasterTable\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

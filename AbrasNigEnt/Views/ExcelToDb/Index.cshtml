@@ -1,0 +1,42 @@
+﻿<main id="excel-db" class="container mt-5">
+
+    <div class="card mx-auto">
+        <h3 class="card-header mb-5">Upload Brands</h3>
+
+        <form asp-controller="ExcelToDb" asp-action="Brand" method="post" role="form" class="card-body pl-5" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="col-md-2 control-label font-weight-bold">Brands File</label>
+                <div class="col-md-6">
+                    <input name="brandsFile" type="file" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="btn-group col-md-offset-2 col-md-6">
+                    <input class="btn btn-primary" type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="card mx-auto">
+        <h3 class="card-header mb-5">Upload Machines</h3>
+
+        <form asp-controller="ExcelToDb" asp-action="Machine" method="post" role="form" class="card-body pl-5" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="col-md-2 control-label font-weight-bold">Machine File</label>
+                <div class="col-md-6">
+                    <input name="machinesFile" type="file" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="btn-group col-md-offset-2 col-md-6">
+                    <input class="btn btn-primary" type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</main>

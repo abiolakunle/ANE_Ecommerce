@@ -1,5 +1,8 @@
 ﻿
 
+using System.Collections;
+using System.Collections.Generic;
+
 namespace AbrasNigEnt.Data.Models
 {
     public class Product
@@ -18,12 +21,18 @@ namespace AbrasNigEnt.Data.Models
 
         public string ThumbUrl { get; set; }
 
-        public virtual Category Category { get; set; }
+        public string Quantity { get; set; }
+
+        public Category Category { get; set; }
         public int CategoryId { get; set; }
 
-        public virtual Brand Brand { get; set; }
+        public Brand Brand { get; set; }
         public int BrandId { get; set; }
 
+        public string Remarks { get; set; }
 
+        public virtual SectionGroup SectionGroup { get; set; }
+
+        public virtual Section Section { get; set; }       
     }
 }

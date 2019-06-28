@@ -2,29 +2,34 @@
 
 @model IEnumerable<Brand>
 
-<main id="brand-list" class="container mt-5">
-    <div class="">
-        <h1 class="mb-5">Brands</h1>
-        <a asp-controller="Brand" asp-action="Create" class="btn btn-dark ml-auto">Create new</a>
+
+<main id="brand-page" class="container mt-5">
+
+    <div class="my-2">
+        <h1 class="my-2">Brands</h1>
+        <a asp-controller="Category" asp-action="Create" class="btn btn-dark my-2">Create new</a>
     </div>
 
+
     <div class="row">
-        @foreach (var b in Model)
-        {
-            <div class="col-md-6 mb-3">
+        @foreach (var brand in Model)
+        {<div class="col-md-4 mb-3">
                 <div class="card shadow-sm">
-                    <div class="card-header mb-5">
-                        <h4>@b.Name</h4>
-                    </div>
                     <div class="card-body">
-                        <p>@b.Description</p>
+                        <h5>@brand.Name</h5>
+                        <hr />
+                        <p class="mb-1 pb-1"><b>Machines count: </b> @brand.Machines.Count</p>
                     </div>
-                    <div class="card-footer">
-                        <a asp-controller="Brand" asp-action="Update" asp-route-id="@b.BrandId" class="btn btn-dark">Edit</a>
-                        <a asp-controller="Brand" asp-action="Delete" asp-route-id="@b.BrandId" class="btn btn-primary">Delete</a>
-                    </div>
+                    @*<div class="card-footer">
+                            <a asp-controller="Category" asp-action="Update" asp-route-id="@category.CategoryId" class="btn btn-dark col-md-3">Edit</a>
+                            <a asp-controller="Category" asp-action="Delete" asp-route-id="@category.CategoryId" class="btn btn-primary col-md-3">Delete</a>
+                        </div>*@
                 </div>
             </div>
         }
     </div>
+
+
+
+
 </main>

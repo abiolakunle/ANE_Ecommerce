@@ -1,9 +1,18 @@
 ﻿@model IEnumerable<Category>
 
-    @foreach (var c in Model)
-    {
-        <a class="dropdown-item" href="#">@c.Name</a>
-    }
+
+
+@foreach (var c in Model)
+{
+    <a class="dropdown-item col-md-4" href="#">@c.CategoryName</a>
+}
+
+
+
+
+
+
+
 
 
 

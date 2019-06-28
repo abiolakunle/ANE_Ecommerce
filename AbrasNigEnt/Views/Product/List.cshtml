@@ -1,36 +1,36 @@
-﻿@*List products*@
+﻿@model IEnumerable<Product>
 
-@model IEnumerable<Product>
+
 
 
 <main id="product-page" class="container mt-5">
-   
-        <div class="">
-            <h1 class="mb-5">Products</h1>
-            <a asp-controller="Product" asp-action="Create" class="btn btn-dark ml-auto">Create new</a>
-        </div>
-        
 
-        <div class="row">
-            @foreach (var p in Model)
-            {  <div class="col-md-4 mb-3">
+    <div class="my-2">
+        <h1 class="my-2">Products</h1>
+        <a asp-controller="Category" asp-action="Create" class="btn btn-dark my-2">Create new</a>
+    </div>
+
+
+    <div class="row">
+        @foreach (var product in Model)
+        {<div class="col-md-4 mb-3">
                 <div class="card shadow-sm">
-                    <div class="card-header">
-                        <h4>Product: @p.Category.Name</h4>
-                    </div>
                     <div class="card-body">
-                        <h5><strong>Part Number:</strong> @p.PartNumber</h5>
-                        <p class="card-text"><strong>Brand:</strong> @p.Brand.Name</p>
+                        <h5><span>Part number: </span>@product.PartNumber</h5>
+                        <hr />
+                        <p class="mb-1 pb-1"><b>Category: </b> @product.Category.CategoryName</p>
                     </div>
-                    <div class="card-footer">
-                        <a asp-controller="Product" asp-action="Update" asp-route-id="@p.ProductId" class="btn btn-dark col-md-3">Edit</a>
-                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@p.ProductId" class="btn btn-primary col-md-3">Delete</a>
-                    </div>
+                    @*<div class="card-footer">
+                            <a asp-controller="Category" asp-action="Update" asp-route-id="@category.CategoryId" class="btn btn-dark col-md-3">Edit</a>
+                            <a asp-controller="Category" asp-action="Delete" asp-route-id="@category.CategoryId" class="btn btn-primary col-md-3">Delete</a>
+                        </div>*@
                 </div>
             </div>
-            }
-        </div>
-    
+
+
+        }
+    </div>
+
 
 
 

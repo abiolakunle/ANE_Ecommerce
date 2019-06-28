@@ -18,8 +18,8 @@ namespace AbrasNigEnt.Data
 
             List<Category> categories = new List<Category>
             {
-                new Category{ Name = "Filters", Description = "Removes dirt from oil and air"},
-                new Category{ Name = "O-Ring", Description = "Seals oil in"}
+                new Category{ CategoryName = "Filters", Description = "Removes dirt from oil and air"},
+                new Category{ CategoryName = "O-Ring", Description = "Seals oil in"}
             };
 
             List<Brand> brands = new List<Brand>
@@ -30,8 +30,10 @@ namespace AbrasNigEnt.Data
 
             List<Product> products = new List<Product>
             {
-                new Product{PartNumber = "600-105-455", Category = categories.ElementAt(0), Brand = brands.ElementAt(0) },
-                new Product{PartNumber = "4550-135-199", Category= categories.ElementAt(1), Brand = brands.ElementAt(1) }
+                new Product{PartNumber = "600-105-455", Category = categories.ElementAt(0), Brand = brands.ElementAt(0)
+                },
+                new Product{PartNumber = "4550-135-199", Category= categories.ElementAt(1), Brand = brands.ElementAt(1)
+                }
             };
 
 
