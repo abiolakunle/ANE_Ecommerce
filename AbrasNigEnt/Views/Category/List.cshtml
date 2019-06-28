@@ -1,35 +1,11 @@
-﻿@*List categories*@
+﻿@model IEnumerable<Category>
 
-@model IEnumerable<Category>
-
-
-<main id="category-page" class="container mt-5">
-
-    <div class="my-2">
-        <h1 class="my-2">Categories</h1>
-        <a asp-controller="Category" asp-action="Create" class="btn btn-dark my-2">Create new</a>
-    </div>
-
-
-    <div class="row">
-        @foreach (var category in Model)
-        {<div class="col-md-4 mb-3">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                      <h5>@category.CategoryName</h5>  
-                        <hr />
-                        <p class="mb-1 pb-1"><b>Products count: </b> @category.Products.Count</p>
-                    </div>
-                    @*<div class="card-footer">
-                        <a asp-controller="Category" asp-action="Update" asp-route-id="@category.CategoryId" class="btn btn-dark col-md-3">Edit</a>
-                        <a asp-controller="Category" asp-action="Delete" asp-route-id="@category.CategoryId" class="btn btn-primary col-md-3">Delete</a>
-                    </div>*@
-                </div>
-            </div>
+<main id="category -list" class="body-part">
+    <div>
+        @foreach (var c in Model)
+        {
+            <h2>@c.CategoryName</h2>
+            <p>@c.Description</p>
         }
     </div>
-
-
-
-
 </main>

@@ -33,10 +33,6 @@
     <Compile Remove="Migrations\20190624183440_Initialize.Designer.cs" />
     <Compile Remove="Migrations\20190624190756_Initialize.cs" />
     <Compile Remove="Migrations\20190624190756_Initialize.Designer.cs" />
-    <Compile Remove="Migrations\20190624192937_Initialize.cs" />
-    <Compile Remove="Migrations\20190624192937_Initialize.Designer.cs" />
-    <Compile Remove="Migrations\20190625194936_initialize.cs" />
-    <Compile Remove="Migrations\20190625194936_initialize.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,7 +49,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\ViewModels\" />
     <Folder Include="wwwroot\images\carousel_images\" />
   </ItemGroup>
 
