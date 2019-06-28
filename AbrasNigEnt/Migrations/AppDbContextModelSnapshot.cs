@@ -129,7 +129,7 @@ namespace AbrasNigEnt.Migrations
 
                     b.Property<decimal>("Price");
 
-                    b.Property<int>("Quantity");
+                    b.Property<string>("Quantity");
 
                     b.Property<string>("Remarks");
 

@@ -19,7 +19,7 @@ namespace AbrasNigEnt.Data.Models
 
         public string PartNumber { get; set; }
 
-        public int Quantity { get; set; }
+        public string Quantity { get; set; }
 
         public string Remarks { get; set; }
 

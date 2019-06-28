@@ -17,7 +17,7 @@ namespace AbrasNigEnt.Data.Repositories
         public IEnumerable<Product> FindWithCategoryAndBrand(Func<Product, bool> predicate)
         {
             return _context.Products.Include(p => p.Category).Include(p => p.Brand).Where(predicate);
-        }
+        }      
 
         public IEnumerable<Product> LoadAllWithCategoryAndBrand()
         {
