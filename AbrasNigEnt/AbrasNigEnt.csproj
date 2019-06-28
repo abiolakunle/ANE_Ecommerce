@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\ViewModels\**" />
+    <Content Remove="Data\ViewModels\**" />
+    <EmbeddedResource Remove="Data\ViewModels\**" />
+    <None Remove="Data\ViewModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Migrations\20190524185054_Initial.cs" />
     <Compile Remove="Migrations\20190524185054_Initial.Designer.cs" />
     <Compile Remove="Migrations\20190524210140_Initial2.cs" />
@@ -53,7 +60,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\ViewModels\" />
     <Folder Include="wwwroot\images\carousel_images\" />
   </ItemGroup>
 

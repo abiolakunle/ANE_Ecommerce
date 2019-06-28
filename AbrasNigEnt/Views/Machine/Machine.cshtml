@@ -1,10 +1,10 @@
-﻿@model Machine
-@namespace AbrasNigEnt.Data.Models
+﻿@model MachineViewModel
 
+<div>  @Model.Machine.ModelName</div>
 <div>
-    @foreach(var section in Model.SectionGroups)
+    @foreach(var s in Model.Sections)
     {
-        <div></div>
+        <div>@s.SectionName</div>
     }
 </div>
     

@@ -18,5 +18,13 @@ namespace AbrasNigEnt.Data.Repositories
         {
             return _context.Machines.Include(m => m.Brand);
         }
+
+        public Machine LoadWithBrandAndSection(Machine machine)
+        {
+            return _context.Machines
+                .Where(m => m.MachineId == machine.MachineId)
+                .Include(m => m.Brand).Include(m => m.Sections)
+                .FirstOrDefault();
+        }
     }
 }

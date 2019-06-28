@@ -25,13 +25,13 @@ namespace AbrasNigEnt.Data.Models
 
         public string SerialNumber { get; set; }
 
-        public Brand Brand { get; set; }
+        public virtual Brand Brand { get; set; }
         public int BrandId { get; set; }
 
         public MachineType MachineType { get; set; }
 
-        public ICollection<Section> Sections { get; set; }
+        public virtual ICollection<Section> Sections { get; set; }
 
-        public ICollection<SectionGroup> SectionGroups { get; set; }
+        public virtual ICollection<SectionGroup> SectionGroups { get; set; }
     }
 }

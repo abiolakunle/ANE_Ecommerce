@@ -1,4 +1,5 @@
 ﻿using AbrasNigEnt.Data.Interfaces;
+using AbrasNigEnt.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -21,9 +22,7 @@ namespace AbrasNigEnt.Controllers
 
         public ViewResult Machine(int id)
         {
-            var machine = _machineRepository.GetById(id);
-
-            return View(machine);
+            return View();
         }
     }
 }

@@ -31,8 +31,6 @@ namespace AbrasNigEnt.Data.Models
 
         public string Remarks { get; set; }
 
-        public ICollection<Section> Sections { get; set; }
-
         public virtual SectionGroup SectionGroup { get; set; }
 
         public virtual Section Section { get; set; }       
