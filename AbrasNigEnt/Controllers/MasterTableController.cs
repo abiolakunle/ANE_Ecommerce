@@ -54,7 +54,7 @@ namespace AbrasNigEnt.Controllers
             }
 
             //Generate full filpath and save file
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), _environment.WebRootPath, "/uploads/"+ masterFile.FileName);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), _environment.WebRootPath, masterFile.FileName);
 
             using (var bits = new FileStream(filePath, FileMode.Create))
             {
@@ -80,6 +80,9 @@ namespace AbrasNigEnt.Controllers
                     Console.WriteLine("Countering" +i);
                     int next = i + 1;
 
+                    
+                    
+                    
                     bool sectionBool = workSheet.Cells[i, 3].Style.Font.Bold;
                     bool sectionGroupBool = workSheet.Cells[next, 3].Style.Font.Bold;
                     if (sectionBool && sectionGroupBool)
@@ -111,7 +114,12 @@ namespace AbrasNigEnt.Controllers
                             Brand = "Komatsu"
                         });
                     }
+                    
+
                 }
+
+
+
 
                 //get data to db
                 foreach (var line in masterLines)
@@ -199,12 +207,17 @@ namespace AbrasNigEnt.Controllers
                                             sectionGroup.Products.Add(product);
                                             category.Products.Add(product);
                                             _dbContext.SaveChanges();
+
                                         }
+
                                     }
                                 }
                             }
+
+
                         }
                     }
+
                 }
 
 
