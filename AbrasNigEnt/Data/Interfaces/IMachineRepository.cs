@@ -9,6 +9,6 @@ namespace AbrasNigEnt.Data.Interfaces
     public interface IMachineRepository : IRepository<Machine>
     {
         IEnumerable<Machine> LoadAllWithBrand();
-        Machine LoadWithBrandAndSection(Machine machine);
+        Machine LoadWithBrandSection(int id);
     }
 }

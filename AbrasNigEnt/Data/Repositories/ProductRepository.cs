@@ -21,7 +21,7 @@ namespace AbrasNigEnt.Data.Repositories
 
         public IEnumerable<Product> LoadAllWithCategoryAndBrand()
         {
-            return _context.Products.Include(p => p.Category).Include(p => p.Brand);
+            return _context.Products.Include(p => p.Category).Include(p => p.Section);
         }
     }
 }

@@ -23,6 +23,7 @@ namespace AbrasNigEnt.Controllers
         public ViewResult List()
         {
             var products = _productRepository.LoadAllWithCategoryAndBrand();
+            
 
             return View(products);
         }

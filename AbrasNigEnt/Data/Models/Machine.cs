@@ -9,8 +9,8 @@ namespace AbrasNigEnt.Data.Models
     {
         public Machine()
         {
-            Sections = new List<Section>();
-            SectionGroups = new List<SectionGroup>();
+            //Sections = new List<Section>();
+            //SectionGroups = new List<SectionGroup>();
         }
 
         public int MachineId { get; set; }
