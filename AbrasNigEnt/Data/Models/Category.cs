@@ -7,7 +7,7 @@ namespace AbrasNigEnt.Data.Models
     {
         public Category()
         {
-            Products = new List<Product>();
+            Products = new HashSet<Product>();
         }
 
         public int CategoryId { get; set; }
@@ -20,7 +20,7 @@ namespace AbrasNigEnt.Data.Models
 
         public string ThumbUrl { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
 
     }
 }

@@ -9,8 +9,8 @@ namespace AbrasNigEnt.Data.Models
     {
         public Machine()
         {
-            //Sections = new List<Section>();
-            //SectionGroups = new List<SectionGroup>();
+            Sections = new HashSet<Section>();
+            SectionGroups = new HashSet<SectionGroup>();
         }
 
         public int MachineId { get; set; }
@@ -28,7 +28,7 @@ namespace AbrasNigEnt.Data.Models
         public virtual Brand Brand { get; set; }
         public int BrandId { get; set; }
 
-        public MachineType MachineType { get; set; }
+        public virtual MachineType MachineType { get; set; }
 
         public virtual ICollection<Section> Sections { get; set; }
 

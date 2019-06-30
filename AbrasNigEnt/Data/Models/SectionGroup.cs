@@ -9,8 +9,8 @@ namespace AbrasNigEnt.Data.Models
     {
         public SectionGroup()
         {
-            Products = new List<Product>();
-            Machines = new List<Machine>();
+            Products = new HashSet<Product>();
+            //Machines = new HashSet<Machine>();
         }
 
         public int SectionGroupId { get; set; }
@@ -23,15 +23,15 @@ namespace AbrasNigEnt.Data.Models
 
         public string ThumbUrl { get; set; }
 
-        public Section Section { get; set; }
+        public virtual Section Section { get; set; }
         public int SectionId { get; set; }
 
         //public Machine Machine { get; set; }
         //public int MachineId { get; set; }
 
-        public ICollection<Machine> Machines { get; set; }
+        //public virtual ICollection<Machine> Machines { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
 
     }
 }

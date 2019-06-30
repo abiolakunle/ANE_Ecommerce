@@ -1,10 +1,15 @@
-﻿@model Machine
+﻿@model MachineViewModel
 
-<div>  @Model.ModelName</div>
+<div>  @Model.Machine.ModelName</div>
 <div>
-    @foreach(var s in Model.SectionGroups)
+    @foreach (var s in Model.SectionGroups)
     {
         <div>@s.SectionGroupName</div>
+    }
+
+    @foreach (var s in Model.Sections)
+    {
+        <div class="bg-secondary">@s.SectionName</div>
     }
 </div>
     

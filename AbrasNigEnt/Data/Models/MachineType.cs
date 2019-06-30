@@ -13,6 +13,6 @@ namespace AbrasNigEnt.Data.Models
 
         public string Description { get; set; }
 
-        public ICollection<Machine> Machines { get; set; }
+        public virtual ICollection<Machine> Machines { get; set; }
     }
 }

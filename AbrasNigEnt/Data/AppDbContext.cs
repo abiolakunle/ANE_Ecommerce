@@ -33,9 +33,9 @@ namespace AbrasNigEnt.Data
             modelBuilder.Entity<Machine>().HasMany(m => m.Sections);
             modelBuilder.Entity<Machine>().HasMany(m => m.SectionGroups);
 
-            modelBuilder.Entity<Section>().HasMany(s => s.Machines);
+           //modelBuilder.Entity<Section>().HasMany(s => s.Machines);
 
-            modelBuilder.Entity<SectionGroup>().HasMany(s => s.Machines);
+            //modelBuilder.Entity<SectionGroup>().HasMany(s => s.Machines);
 
             modelBuilder.Entity<Product>().HasOne(s => s.SectionGroup);
         }

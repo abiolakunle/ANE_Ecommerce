@@ -54,7 +54,7 @@ namespace AbrasNigEnt.Controllers
             }
 
             //Generate full filpath and save file
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), _environment.WebRootPath, masterFile.FileName);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), _environment.WebRootPath, "uploads/" + masterFile.FileName);
 
             using (var bits = new FileStream(filePath, FileMode.Create))
             {
@@ -69,7 +69,7 @@ namespace AbrasNigEnt.Controllers
                 ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
                 int totalRows = workSheet.Dimension.Rows;
 
-                List<MasterTableLine> masterLines = new List<MasterTableLine>();
+                HashSet<MasterTableLine> masterLines = new HashSet<MasterTableLine>();
 
                 string lineSection = null;
                 string lineSectionGroup = null;
@@ -119,19 +119,30 @@ namespace AbrasNigEnt.Controllers
                 }
 
 
-
+                int count = 0;
 
                 //get data to db
                 foreach (var line in masterLines)
                 {
+                    Console.WriteLine("Cycle" + count++);
+                    Console.WriteLine("Started db operation");
                     if (line.Brand != "")
                     {
                         Brand brand = new Brand
                         {
                             Name = line.Brand
                         };
-                        _dbContext.Upsert(brand).On(b => new { b.Name }).Run();
-                        brand = _dbContext.Brands.Where(m => m.Name == line.Brand).FirstOrDefault();
+
+                        Brand dbBrand =_dbContext.Brands.Where(b => b.Name == brand.Name).FirstOrDefault();
+                        if(dbBrand == null)
+                        {
+                            _dbContext.Brands.Add(brand);
+                            _dbContext.SaveChanges();
+                        }
+                        
+                        //_dbContext.Upsert(brand).On(b => new { b.Name }).Run();
+                        Console.WriteLine("Added brand");
+                        brand = _dbContext.Brands.Where(b => b.Name == line.Brand).FirstOrDefault();
 
                         if (line.ModelName != "")
                         {
@@ -142,7 +153,16 @@ namespace AbrasNigEnt.Controllers
                                 BrandId = brand.BrandId
                             };
 
-                            _dbContext.Upsert(machine).On(m => new { m.ModelName }).Run();
+                            Machine dbMachine = _dbContext.Machines.Where(m => m.ModelName == machine.ModelName).FirstOrDefault();
+
+                            if(dbMachine == null)
+                            {
+                                _dbContext.Machines.Add(machine);
+                                _dbContext.SaveChanges();
+                            }
+
+                           // _dbContext.Upsert(machine).On(m => new { m.ModelName }).Run();
+                            Console.WriteLine("Added machine");
                             machine = _dbContext.Machines.Where(m => m.ModelName == line.ModelName).FirstOrDefault();
 
 
@@ -152,13 +172,18 @@ namespace AbrasNigEnt.Controllers
                                 {
                                     SectionName = line.Section
                                 };
-                                _dbContext.Sections.Upsert(section).On(s => new { s.SectionName }).Run();
+
+                                Section dbSection = _dbContext.Sections.Where(s => s.SectionName == section.SectionName).FirstOrDefault();
+
+                                if(dbSection == null)
+                                {
+                                    _dbContext.Sections.Add(section);
+                                    _dbContext.SaveChanges();
+                                }
+
+                                //_dbContext.Sections.Upsert(section).On(s => new { s.SectionName }).Run();
+                                Console.WriteLine("Added section");
                                 section = _dbContext.Sections.Where(s => s.SectionName == line.Section).FirstOrDefault();
-
-                                section.Machines.Add(machine);
-                                machine.Sections.Add(section);
-                                _dbContext.SaveChanges();
-
 
                                 if (line.SectionGroup != "")
                                 {
@@ -168,12 +193,21 @@ namespace AbrasNigEnt.Controllers
                                         SectionId = section.SectionId
                                     };
 
-                                    _dbContext.SectionGroups.Upsert(sectionGroup).On(s => new { s.SectionGroupName }).Run();
-                                    sectionGroup = _dbContext.SectionGroups.Where(s => s.SectionGroupName == line.SectionGroup).FirstOrDefault();
+                                    SectionGroup dbSectionGroup = _dbContext.SectionGroups
+                                        .Where(s => s.SectionGroupName == sectionGroup.SectionGroupName)
+                                        .FirstOrDefault();
 
-                                    sectionGroup.Machines.Add(machine);
-                                    machine.SectionGroups.Add(sectionGroup);
-                                    _dbContext.SaveChanges();
+                                    if(dbSectionGroup == null)
+                                    {
+                                        _dbContext.SectionGroups.Add(sectionGroup);
+                                        _dbContext.SaveChanges();
+                                    }
+
+                                    //_dbContext.SectionGroups.Upsert(sectionGroup).On(s => new { s.SectionGroupName }).Run();
+                                    Console.WriteLine("Added sectiongroup");
+                                    sectionGroup = _dbContext.SectionGroups.Where(s => s.SectionGroupName == sectionGroup.SectionGroupName).FirstOrDefault();
+
+                                    
 
                                     if (line.PartName != "")
                                     {
@@ -182,8 +216,17 @@ namespace AbrasNigEnt.Controllers
                                             CategoryName = line.PartName,
                                         };
 
-                                        _dbContext.Categories.Upsert(category).On(s => new { s.CategoryName }).Run();
-                                        category = _dbContext.Categories.Where(s => s.CategoryName == line.PartName).FirstOrDefault();
+                                        Category dbCategory = _dbContext.Categories.Where(c => c.CategoryName == category.CategoryName).FirstOrDefault();
+
+                                        if(dbCategory == null)
+                                        {
+                                            _dbContext.Categories.Add(category);
+                                            _dbContext.SaveChanges();
+                                        }
+
+                                        //_dbContext.Categories.Upsert(category).On(s => new { s.CategoryName }).Run();
+                                        Console.WriteLine("Added category");
+                                        category = _dbContext.Categories.Where(s => s.CategoryName == category.CategoryName).FirstOrDefault();
 
                                         brand.Categories.Add(category);
                                         _dbContext.SaveChanges();
@@ -199,14 +242,74 @@ namespace AbrasNigEnt.Controllers
                                                 Remarks = line.Remarks
                                             };
 
-                                            _dbContext.Products.Upsert(product).On(s => new { s.PartNumber }).Run();
+                                            Product dbProduct = _dbContext.Products.Where(p => p.PartNumber == product.PartNumber).FirstOrDefault();
+
+                                            if(dbProduct == null)
+                                            {
+                                                _dbContext.Products.Add(product);
+                                                _dbContext.SaveChanges();
+                                            }
+
+                                            //_dbContext.Products.Upsert(product).On(s => new { s.PartNumber }).Run();
+                                            Console.WriteLine("Added product");
                                             product = _dbContext.Products.Where(s => s.PartNumber == line.PartNumber).FirstOrDefault();
 
+                                            //Brand One to many
+                                            brand.Categories.Add(category);
+                                            
+                                            brand.Machines.Add(machine);
+                                            
                                             brand.Products.Add(product);
-                                            section.Products.Add(product);
+                                            
+                                            brand.SectionGroups.Add(sectionGroup);
+                                            
+                                            brand.Sections.Add(section);
+                                            
+
+                                            //Machine One to many
+                                            machine.SectionGroups.Add(sectionGroup);
+                                            
+                                            machine.Sections.Add(section);
+                                            
+
+                                            //Section One to many
+                                            //section.Machines.Add(machine);
+                                            
+                                            //section.Products.Add(product);
+                                            
+                                            section.SectionGroups.Add(sectionGroup);
+                                            
+
+                                            //SectionGroup One to many
+                                            //sectionGroup.Machines.Add(machine);
+                                            
                                             sectionGroup.Products.Add(product);
+                                            
+
+                                            //Category One to many
                                             category.Products.Add(product);
-                                            _dbContext.SaveChanges();
+                                            
+
+                                            
+
+
+
+
+
+
+                                            //sectionGroup.Machines.Add(machine);
+                                            //machine.SectionGroups.Add(sectionGroup);
+                                            //_dbContext.SaveChanges();
+
+                                            //section.Machines.Add(machine);
+                                            //machine.Sections.Add(section);
+                                            //_dbContext.SaveChanges();
+
+                                            //brand.Products.Add(product);
+                                            //section.Products.Add(product);
+                                            //sectionGroup.Products.Add(product);
+                                            //category.Products.Add(product);
+                                            //_dbContext.SaveChanges();
 
                                         }
 
@@ -217,8 +320,9 @@ namespace AbrasNigEnt.Controllers
 
                         }
                     }
-
+                    Console.WriteLine("Ended dbOpration");
                 }
+                _dbContext.SaveChanges();
 
 
                 return View(nameof(UploadMaster), masterLines);

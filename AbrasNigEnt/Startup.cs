@@ -41,6 +41,8 @@ namespace AbrasNigEnt
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IMachineRepository, MachineRepository>();
+            services.AddTransient<ISectionGroupRepository, SectionGroupRepository>();
+            services.AddTransient<ISectionRepository, SectionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

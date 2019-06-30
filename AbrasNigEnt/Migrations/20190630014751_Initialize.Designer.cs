@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbrasNigEnt.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190625202116_initialize")]
-    partial class initialize
+    [Migration("20190630014751_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

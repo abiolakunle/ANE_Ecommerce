@@ -23,10 +23,10 @@ namespace AbrasNigEnt.Data.Models
 
         public string Quantity { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
         public int CategoryId { get; set; }
 
-        public Brand Brand { get; set; }
+        public virtual Brand Brand { get; set; }
         public int BrandId { get; set; }
 
         public string Remarks { get; set; }
